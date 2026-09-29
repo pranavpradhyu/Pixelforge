@@ -1,0 +1,18 @@
+# Optional deep models. Install the ones you want, then set the matching
+# env flag (see .env.example). Everything degrades gracefully if absent.
+
+# Background removal (CPU-friendly, ONNX) — set ENABLE_REMBG=1
+rembg==2.0.59
+onnxruntime==1.18.1
+
+# Learned no-reference IQA (recommended in production) — set ENABLE_PYIQA=1
+pyiqa==0.1.11
+torch>=2.1
+torchvision>=0.16
+
+# Super-resolution — set ENABLE_REALESRGAN=1 (needs RealESRGAN_x4plus.pth in weights/)
+realesrgan==0.3.0
+basicsr==1.4.2
+
+# Face restoration — set ENABLE_GFPGAN=1 (needs GFPGANv1.4.pth in weights/)
+gfpgan==1.3.8

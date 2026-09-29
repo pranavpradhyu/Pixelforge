@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b3a67"/>
+      <stop offset="0.45" stop-color="#c96f4a"/>
+      <stop offset="0.7" stop-color="#f2b56b"/>
+      <stop offset="1" stop-color="#ffe3a8"/>
+    </linearGradient>
+    <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2b56b"/>
+      <stop offset="0.5" stop-color="#9a6f7a"/>
+      <stop offset="1" stop-color="#33324e"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff6d8"/>
+      <stop offset="1" stop-color="#ffd27a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="360" fill="url(#sky)"/>
+  <circle cx="520" cy="250" r="150" fill="url(#sun)"/>
+  <circle cx="520" cy="250" r="46" fill="#fff2cf"/>
+
+  <!-- far ridge -->
+  <path d="M0 300 L140 250 L260 285 L400 230 L560 280 L700 240 L800 275 L800 360 L0 360 Z" fill="#6c4a63" opacity="0.85"/>
+  <!-- near ridge -->
+  <path d="M0 330 L120 300 L300 340 L470 300 L640 345 L800 315 L800 360 L0 360 Z" fill="#4a3350"/>
+
+  <!-- lake -->
+  <rect y="360" width="800" height="240" fill="url(#lake)"/>
+  <!-- sun reflection -->
+  <rect x="486" y="360" width="68" height="240" fill="#ffdf9c" opacity="0.35"/>
+  <g fill="#ffe9bd" opacity="0.5">
+    <rect x="470" y="392" width="100" height="4" rx="2"/>
+    <rect x="480" y="430" width="80" height="4" rx="2"/>
+    <rect x="466" y="472" width="108" height="5" rx="2"/>
+    <rect x="484" y="520" width="72" height="5" rx="2"/>
+  </g>
+  <!-- foreground boat -->
+  <path d="M150 470 q40 26 92 0 l-14 26 q-32 14 -64 0 Z" fill="#241a2e"/>
+  <rect x="194" y="430" width="3" height="42" fill="#241a2e"/>
+</svg>

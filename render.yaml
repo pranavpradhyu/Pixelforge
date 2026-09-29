@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: pixelforge
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    # ONE worker: job progress is kept in memory, so all requests must hit the same process.
+    startCommand: gunicorn 'run:app' --workers 1 --threads 4 --timeout 300 --bind 0.0.0.0:$PORT
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ENABLE_REMBG
+        value: "0"
+      - key: WORKING_MAX_EDGE
+        value: "1200"

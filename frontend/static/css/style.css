@@ -1,0 +1,180 @@
+:root{
+  --bg:#131519; --surface:#1B1E25; --surface-2:#22262F; --line:#2C313B;
+  --text:#ECEEF1; --muted:#969CA6; --accent:#4B7BFF; --accent-press:#3A66E6;
+  --good:#43C59E; --danger:#F0776B;
+  --r:14px; --r-sm:9px; --shadow:0 24px 60px -28px rgba(0,0,0,.7);
+  --maxw:1160px;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0);
+  padding-bottom:env(safe-area-inset-bottom,0);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"Hanken Grotesk",system-ui,sans-serif; font-size:16px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+h1,h2,h3{margin:0; font-weight:500; letter-spacing:-.01em}
+
+/* ---------- header ---------- */
+.site{
+  max-width:var(--maxw); margin:0 auto; padding:26px 24px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.wordmark{
+  font-family:"Newsreader",serif; font-size:26px; letter-spacing:-.02em;
+  text-decoration:none; color:var(--text);
+}
+.wordmark em{font-style:italic; color:var(--accent)}
+.site-nav{display:flex; gap:26px; font-size:15px}
+.site-nav a{color:var(--muted); text-decoration:none; transition:color .15s}
+.site-nav a:hover{color:var(--text)}
+
+/* ---------- workbench ---------- */
+.bench{
+  max-width:var(--maxw); margin:12px auto 0; padding:24px;
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+  gap:56px; align-items:center; min-height:clamp(440px,64vh,640px);
+}
+.bench-copy{max-width:34rem}
+h1{font-family:"Newsreader",serif; font-size:clamp(2.3rem,4.6vw,3.4rem); line-height:1.04}
+.lede{color:var(--muted); font-size:1.05rem; margin:1.1rem 0 1.9rem; max-width:32ch}
+
+/* ---------- stage (swaps idle/working/result) ---------- */
+.stage{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+  padding:18px;
+}
+.dropzone{
+  display:block; border:1.5px dashed var(--line); border-radius:var(--r-sm);
+  background:var(--surface-2); cursor:pointer; transition:border-color .15s,background .15s;
+}
+.dropzone.drag{border-color:var(--accent); background:#20283c}
+.dz-inner{padding:30px 22px; text-align:center}
+.dz-mark{width:30px; height:30px; margin-bottom:10px; fill:none;
+  stroke:var(--accent); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+.dz-title{margin:0; font-size:1.06rem; font-weight:600}
+.dz-sub{margin:.35rem 0 0; color:var(--muted); font-size:.9rem}
+.linklike{background:none; border:0; padding:0; color:var(--accent); cursor:pointer;
+  font:inherit; text-decoration:underline; text-underline-offset:2px}
+
+.intents{border:0; padding:14px 2px 2px; margin:0;
+  display:flex; flex-wrap:wrap; gap:8px}
+.intents legend{flex:0 0 100%; color:var(--muted); font-size:.82rem; padding:0 0 10px}
+.chip{position:relative}
+.chip input{position:absolute; opacity:0; inset:0; cursor:pointer}
+.chip span{
+  display:inline-block; padding:7px 13px; border:1px solid var(--line);
+  border-radius:999px; font-size:.86rem; color:var(--muted);
+  transition:all .15s; user-select:none;
+}
+.chip:hover span{color:var(--text); border-color:#3a4150}
+.chip input:checked+span{color:#fff; background:var(--accent); border-color:var(--accent)}
+.chip input:focus-visible+span{outline:2px solid var(--accent); outline-offset:2px}
+
+/* working */
+.working{padding:8px 4px 4px; text-align:center}
+.bar{height:6px; background:var(--surface-2); border-radius:999px; overflow:hidden}
+.bar span{display:block; height:100%; width:0; background:var(--accent);
+  border-radius:999px; transition:width .4s ease}
+.working-msg{margin:14px 0 6px; font-size:.95rem}
+.working #cancel{font-size:.85rem; color:var(--muted); text-decoration:none}
+
+/* result */
+.result{padding:6px 4px 4px}
+.found{margin:2px 0 16px; color:var(--muted); font-size:.92rem}
+.found b{color:var(--text); font-weight:600}
+.actions{display:flex; gap:10px; flex-wrap:wrap}
+.btn{
+  appearance:none; border:1px solid transparent; border-radius:var(--r-sm);
+  padding:11px 18px; font:inherit; font-weight:600; font-size:.95rem;
+  cursor:pointer; text-decoration:none; text-align:center; transition:all .15s;
+}
+.btn.primary{background:var(--accent); color:#fff}
+.btn.primary:hover{background:var(--accent-press)}
+.btn.ghost{background:transparent; border-color:var(--line); color:var(--text)}
+.btn.ghost:hover{border-color:#3a4150}
+.error{margin:12px 4px 2px; color:var(--danger); font-size:.9rem}
+
+/* ---------- reveal viewer ---------- */
+.viewer{margin:0}
+.reveal{
+  position:relative; aspect-ratio:4/3; border-radius:var(--r); overflow:hidden;
+  background:#0d0f13; box-shadow:var(--shadow); --p:55; user-select:none;
+  outline:1px solid var(--line);
+}
+.reveal-after,.reveal-before{
+  position:absolute; inset:0; background-size:cover; background-position:center;
+  background-image:var(--after);
+}
+.reveal-before{
+  background-image:var(--before);
+  clip-path:inset(0 calc((100 - var(--p)) * 1%) 0 0);
+}
+.reveal-handle{
+  position:absolute; top:0; bottom:0; left:calc(var(--p) * 1%);
+  width:2px; background:var(--accent); transform:translateX(-1px); cursor:ew-resize;
+  touch-action:none;
+}
+.reveal-handle span{
+  position:absolute; top:50%; left:50%; width:38px; height:38px;
+  transform:translate(-50%,-50%); border-radius:50%;
+  background:var(--accent); box-shadow:0 4px 14px rgba(0,0,0,.5);
+  display:grid; place-items:center;
+}
+.reveal-handle span::before,.reveal-handle span::after{
+  content:""; width:0; height:0; border-block:5px solid transparent; position:absolute;
+}
+.reveal-handle span::before{border-right:6px solid #fff; left:9px}
+.reveal-handle span::after{border-left:6px solid #fff; right:9px}
+.reveal-handle:focus-visible{outline:2px solid #fff; outline-offset:2px}
+/* registration ticks — echo photo alignment marks */
+.tick{position:absolute; width:14px; height:14px; opacity:.55;
+  border-color:rgba(255,255,255,.7); border-style:solid; border-width:0}
+.tick.tl{top:10px; left:10px; border-top-width:1.5px; border-left-width:1.5px}
+.tick.tr{top:10px; right:10px; border-top-width:1.5px; border-right-width:1.5px}
+.tick.bl{bottom:10px; left:10px; border-bottom-width:1.5px; border-left-width:1.5px}
+.tick.br{bottom:10px; right:10px; border-bottom-width:1.5px; border-right-width:1.5px}
+figcaption{display:flex; justify-content:space-between; margin-top:12px;
+  color:var(--muted); font-size:.82rem}
+
+/* ---------- how ---------- */
+.how{max-width:var(--maxw); margin:40px auto; padding:56px 24px 24px;
+  border-top:1px solid var(--line)}
+.how h2{font-family:"Newsreader",serif; font-size:clamp(1.6rem,3vw,2.1rem);
+  max-width:20ch; margin-bottom:34px}
+.how-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:34px}
+.how-grid h3{font-size:1.06rem; margin-bottom:.5rem}
+.how-grid p{color:var(--muted); font-size:.96rem; margin:0; max-width:34ch}
+
+/* ---------- footer ---------- */
+.site-foot{max-width:var(--maxw); margin:0 auto; padding:30px 24px 46px;
+  display:flex; justify-content:space-between; gap:16px; color:var(--muted);
+  font-size:.85rem; border-top:1px solid var(--line)}
+.site-foot span:first-child{font-family:"Newsreader",serif; color:var(--text)}
+
+/* ---------- responsive ---------- */
+@media (max-width:860px){
+  .bench{grid-template-columns:1fr; gap:30px; padding-top:8px}
+  .viewer{order:-1}
+  .how-grid{grid-template-columns:1fr; gap:26px}
+  .site-foot{flex-direction:column; gap:6px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important; animation:none !important}
+}
+
+/* ---------- hero demo damage (idle only) ---------- */
+.reveal[data-demo="1"]{
+  --before:url("../img/sample.svg"); --after:url("../img/sample.svg");
+}
+.reveal[data-demo="1"] .reveal-before{
+  filter:grayscale(.9) brightness(.55) contrast(.82) blur(1.1px) sepia(.15);
+}
+.reveal[data-demo="1"] .reveal-before::after{
+  content:""; position:absolute; inset:0; opacity:.5; mix-blend-mode:overlay;
+  background:
+    repeating-linear-gradient(92deg, rgba(255,255,255,.06) 0 1px, transparent 1px 5px),
+    repeating-linear-gradient(3deg, rgba(0,0,0,.10) 0 1px, transparent 1px 9px);
+}

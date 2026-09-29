@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>PixelForge — bring damaged photos back to life</title>
+  <meta name="description" content="Upload a dark, blurry, noisy or low-resolution photo and get the best possible version back." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <header class="site">
+    <a class="wordmark" href="/">Pixel<em>Forge</em></a>
+    <nav class="site-nav">
+      <a href="#how">How it works</a>
+      <a href="https://github.com/pranavpradhyu" rel="noopener">GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ WORKBENCH ============ -->
+    <section class="bench" id="top">
+      <div class="bench-copy">
+        <h1>Bring a damaged photo<br>back to life.</h1>
+        <p class="lede">
+          Drop in a photo that's too dark, blurry, grainy, faded, or too small.
+          PixelForge repairs it and hands back the best version — no dials,
+          no jargon.
+        </p>
+
+        <!-- Uploader / progress / result all swap inside this card -->
+        <div class="stage" id="stage" data-state="idle">
+
+          <!-- IDLE -->
+          <form class="dropzone" id="dropzone" aria-label="Upload a photo">
+            <input type="file" id="file" accept="image/*" hidden />
+            <div class="dz-inner">
+              <svg class="dz-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L8 8m4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+              <p class="dz-title">Drop a photo here</p>
+              <p class="dz-sub">or <button type="button" class="linklike" id="browse">choose a file</button> · JPG, PNG, WEBP up to 20&nbsp;MB</p>
+            </div>
+          </form>
+
+          <fieldset class="intents" id="intents">
+            <legend>What are you fixing?</legend>
+            <label class="chip"><input type="radio" name="intent" value="auto" checked><span>Let it decide</span></label>
+            <label class="chip"><input type="radio" name="intent" value="oldphoto"><span>Old photo</span></label>
+            <label class="chip"><input type="radio" name="intent" value="lowlight"><span>Too dark</span></label>
+            <label class="chip"><input type="radio" name="intent" value="product"><span>Product shot</span></label>
+            <label class="chip"><input type="radio" name="intent" value="upscale"><span>Too small</span></label>
+            <label class="chip"><input type="radio" name="intent" value="cutout"><span>Cut out subject</span></label>
+          </fieldset>
+
+          <!-- WORKING -->
+          <div class="working" id="working" hidden>
+            <div class="bar"><span id="bar-fill"></span></div>
+            <p class="working-msg" id="working-msg">Inspecting the photo…</p>
+            <button type="button" class="linklike" id="cancel">Cancel</button>
+          </div>
+
+          <!-- RESULT -->
+          <div class="result" id="result" hidden>
+            <p class="found" id="found"></p>
+            <div class="actions">
+              <a class="btn primary" id="download" download>Download photo</a>
+              <button type="button" class="btn ghost" id="again">Enhance another</button>
+            </div>
+          </div>
+
+          <p class="error" id="error" hidden></p>
+        </div>
+      </div>
+
+      <!-- The photograph is the light source: a live before/after reveal -->
+      <figure class="viewer" id="viewer" aria-label="Before and after comparison">
+        <div class="reveal" id="reveal">
+          <div class="reveal-after" id="reveal-after"></div>
+          <div class="reveal-before" id="reveal-before"></div>
+          <div class="reveal-handle" id="reveal-handle" role="slider"
+               tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55"
+               aria-label="Reveal slider"><span></span></div>
+          <span class="tick tl"></span><span class="tick tr"></span>
+          <span class="tick bl"></span><span class="tick br"></span>
+        </div>
+        <figcaption><span class="cap-l">Before</span><span class="cap-r">After</span></figcaption>
+      </figure>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="how" id="how">
+      <h2>One upload. Every repair tried. The best one kept.</h2>
+      <div class="how-grid">
+        <article>
+          <h3>It reads the photo first</h3>
+          <p>PixelForge measures light, focus, grain, resolution and whether
+             there's a face — so it only attempts repairs the photo actually needs.</p>
+        </article>
+        <article>
+          <h3>It tries many repairs at once</h3>
+          <p>Brightening, sharpening, denoising, upscaling, colour correction and
+             face repair each produce a candidate — then compete on merit.</p>
+        </article>
+        <article>
+          <h3>You get the winner only</h3>
+          <p>Every candidate is graded for quality and checked so it still looks
+             like your photo. The single best result is what you download.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <span>PixelForge</span>
+    <span>Your images are processed on demand and deleted automatically.</span>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
