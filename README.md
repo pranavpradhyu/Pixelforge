@@ -1,9 +1,20 @@
-# PixelForge — Intelligent Image Restoration Studio
+# PixelForge - Intelligent Image Restoration Studio
 
-Upload one degraded photo. PixelForge inspects it, runs **many** restoration
-algorithms in the backend, scores every result, and returns only the single
-best version. The user never sees a model, a metric, or a comparison — just a
-before/after slider and a download button.
+Upload a damaged photo (too dark, blurry, grainy, faded or low-resolution)
+and get back the best repaired version.
+
+### Live demo: https://pixelforge-tfz2.onrender.com
+
+> The demo runs on Render's free tier, so the first visit after a period of
+> inactivity can take 30-60 seconds to wake up.
+
+**Stack:** Python, Flask, OpenCV, scikit-image, NumPy, vanilla JavaScript
+**Deployed on:** Render (free tier, classical OpenCV methods)
+
+PixelForge inspects the photo, runs **many** restoration algorithms in the
+backend, scores every result, and returns only the single best version. The
+user never sees a model, a metric, or a comparison - just a before/after slider
+and a download button.
 
 > Built as an end-to-end computer-vision application: heavy on CV breadth,
 > real-world utility, and an automatic *model-selection* mechanism rather than a
@@ -92,7 +103,7 @@ logged for research/ops but stripped from the user-facing API response.
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt          # base: CPU, no weights needed
+pip install -r requirements.txt          # base: CPU, no weights needed (OpenCV 4.x)
 cp .env.example .env                      # optional, tweak flags
 python run.py                             # http://localhost:5000
 ```
@@ -148,6 +159,11 @@ backend/
   routes.py          Flask API + pages
 frontend/            template + darkroom-themed CSS/JS UI
 ```
+
+## Deployment
+
+The live demo is deployed from this repo to Render using `render.yaml`
+(1 gunicorn worker + 4 threads, because job progress is kept in memory).
 
 ## Notes on the free tier
 
